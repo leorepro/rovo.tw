@@ -16,9 +16,11 @@ export function useScrollAnimation() {
       { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
     )
 
-    document.querySelectorAll('.animate-on-scroll').forEach((el) => {
-      observer.value?.observe(el)
-    })
+    setTimeout(() => {
+      document.querySelectorAll('.animate-on-scroll').forEach((el) => {
+        observer.value?.observe(el)
+      })
+    }, 100)
   })
 
   onUnmounted(() => {

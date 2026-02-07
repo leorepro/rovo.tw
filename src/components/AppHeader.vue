@@ -3,6 +3,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 
 const isScrolled = ref(false)
 const isMobileMenuOpen = ref(false)
+const activeSection = ref('')
 
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 10
@@ -10,33 +11,65 @@ const handleScroll = () => {
 
 const toggleMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value
+  document.body.style.overflow = isMobileMenuOpen.value ? 'hidden' : ''
 }
 
 const closeMobileMenu = () => {
   isMobileMenuOpen.value = false
+  document.body.style.overflow = ''
 }
+
+const scrollToTop = () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
+const navItems = [
+  { label: '功能', href: '#features' },
+  { label: '應用範例', href: '#use-cases' },
+  { label: '技術架構', href: '#technology' },
+  { label: '客戶案例', href: '#customers' },
+  { label: 'FAQ', href: '#faq' },
+  { label: '聯絡我們', href: '#contact' },
+]
+
+const sectionIds = navItems.map(item => item.href.slice(1))
+
+let sectionObserver: IntersectionObserver | null = null
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
+  handleScroll()
+
+  sectionObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          activeSection.value = entry.target.id
+        }
+      })
+    },
+    { rootMargin: '-20% 0px -60% 0px' }
+  )
+
+  setTimeout(() => {
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id)
+      if (el) sectionObserver?.observe(el)
+    })
+  }, 200)
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
+  sectionObserver?.disconnect()
+  document.body.style.overflow = ''
 })
-
-const navItems = [
-  { label: '企業挑戰', href: '#pain-points' },
-  { label: '什麼是 Rovo', href: '#what-is-rovo' },
-  { label: '功能特色', href: '#features' },
-  { label: '應用場景', href: '#use-cases' },
-  { label: '聯絡我們', href: '#contact' },
-]
 </script>
 
 <template>
   <header class="header" :class="{ 'header--scrolled': isScrolled }">
     <div class="header__container container">
-      <a href="#" class="header__logo">
+      <a href="#" class="header__logo" @click.prevent="scrollToTop">
         <svg class="header__logo-icon" viewBox="0 0 32 32" width="36" height="36">
           <defs>
             <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -59,16 +92,23 @@ const navItems = [
           :key="item.href"
           :href="item.href"
           class="header__nav-link"
+          :class="{ 'header__nav-link--active': activeSection === item.href.slice(1) }"
           @click="closeMobileMenu"
         >
           {{ item.label }}
         </a>
         <a href="#contact" class="btn btn-primary header__cta" @click="closeMobileMenu">
-          免費諮詢
+          預約免費 Demo
         </a>
       </nav>
 
-      <button class="header__hamburger" :class="{ 'header__hamburger--open': isMobileMenuOpen }" @click="toggleMobileMenu" aria-label="Toggle menu">
+      <button
+        class="header__hamburger"
+        :class="{ 'header__hamburger--open': isMobileMenuOpen }"
+        @click="toggleMobileMenu"
+        :aria-label="isMobileMenuOpen ? '關閉選單' : '開啟選單'"
+        :aria-expanded="isMobileMenuOpen"
+      >
         <span></span>
         <span></span>
         <span></span>
@@ -93,7 +133,7 @@ const navItems = [
 
 .header--scrolled {
   background: rgba(255, 255, 255, 0.98);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
   backdrop-filter: blur(10px);
 }
 
@@ -144,12 +184,12 @@ const navItems = [
 .header__nav {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
 }
 
 .header__nav-link {
-  padding: 8px 16px;
-  font-size: 0.9rem;
+  padding: 8px 14px;
+  font-size: 0.875rem;
   font-weight: 500;
   color: var(--color-text-medium);
   border-radius: var(--radius-sm);
@@ -170,10 +210,20 @@ const navItems = [
   background: rgba(255, 255, 255, 0.15);
 }
 
+.header__nav-link--active {
+  color: var(--color-primary) !important;
+  background: rgba(0, 82, 204, 0.08);
+}
+
+.header:not(.header--scrolled) .header__nav-link--active {
+  color: white !important;
+  background: rgba(255, 255, 255, 0.2);
+}
+
 .header__cta {
   margin-left: 8px;
   padding: 10px 24px;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
 }
 
 .header__hamburger {
@@ -196,6 +246,10 @@ const navItems = [
   background: white;
 }
 
+.header__hamburger--open span {
+  background: var(--color-text-dark) !important;
+}
+
 .header__hamburger--open span:nth-child(1) {
   transform: rotate(45deg) translate(5px, 5px);
 }
@@ -208,7 +262,7 @@ const navItems = [
   transform: rotate(-45deg) translate(5px, -5px);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1023px) {
   .header__hamburger {
     display: flex;
   }
@@ -218,6 +272,7 @@ const navItems = [
     top: var(--header-height);
     left: 0;
     right: 0;
+    bottom: 0;
     background: white;
     flex-direction: column;
     padding: 24px;
@@ -226,6 +281,7 @@ const navItems = [
     opacity: 0;
     pointer-events: none;
     transition: all var(--transition-base);
+    gap: 4px;
   }
 
   .header__nav--open {
@@ -239,6 +295,12 @@ const navItems = [
     padding: 12px 16px;
     width: 100%;
     text-align: center;
+    font-size: 1rem;
+  }
+
+  .header__nav-link--active {
+    background: rgba(0, 82, 204, 0.08) !important;
+    color: var(--color-primary) !important;
   }
 
   .header__cta {

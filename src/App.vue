@@ -1,60 +1,48 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
+import { useScrollAnimation } from './composables/useScrollAnimation'
 import AppHeader from './components/AppHeader.vue'
 import HeroSection from './components/HeroSection.vue'
-import VideoSection from './components/VideoSection.vue'
 import PainPoints from './components/PainPoints.vue'
-import WhatIsRovo from './components/WhatIsRovo.vue'
-import Features from './components/Features.vue'
+import ProductFeatures from './components/ProductFeatures.vue'
 import UseCases from './components/UseCases.vue'
-import Bookmarks from './components/Bookmarks.vue'
+import IntegrationSection from './components/IntegrationSection.vue'
+import AgentDeepDive from './components/AgentDeepDive.vue'
+import TeamworkGraph from './components/TeamworkGraph.vue'
+import CustomerCases from './components/CustomerCases.vue'
+import FaqSection from './components/FaqSection.vue'
+import FreeCourseCta from './components/FreeCourseCta.vue'
+import ContactForm from './components/ContactForm.vue'
+import VideoSection from './components/VideoSection.vue'
 import AppFooter from './components/AppFooter.vue'
 
-const observer = ref<IntersectionObserver | null>(null)
-
-onMounted(() => {
-  observer.value = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible')
-          observer.value?.unobserve(entry.target)
-        }
-      })
-    },
-    { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-  )
-
-  setTimeout(() => {
-    document.querySelectorAll('.animate-on-scroll').forEach((el) => {
-      observer.value?.observe(el)
-    })
-  }, 100)
-})
-
-onUnmounted(() => {
-  observer.value?.disconnect()
-})
+useScrollAnimation()
 </script>
 
 <template>
   <div id="app-root">
+    <a href="#main-content" class="sr-only" style="position:fixed;top:0;left:0;z-index:10000;padding:12px 16px;background:var(--color-primary);color:white;text-decoration:none;" @focus="($event.target as HTMLElement).classList.remove('sr-only')" @blur="($event.target as HTMLElement).classList.add('sr-only')">
+      跳到主要內容
+    </a>
     <AppHeader />
-    <main>
+    <main id="main-content">
       <HeroSection />
-      <VideoSection />
       <PainPoints />
-      <WhatIsRovo />
-      <Features />
+      <ProductFeatures />
       <UseCases />
-      <Bookmarks />
+      <IntegrationSection />
+      <AgentDeepDive />
+      <TeamworkGraph />
+      <CustomerCases />
+      <FaqSection />
+      <FreeCourseCta />
+      <ContactForm />
+      <VideoSection />
     </main>
     <AppFooter />
   </div>
 </template>
 
 <style>
-/* Scroll animation styles */
 .animate-on-scroll {
   opacity: 0;
   transform: translateY(30px);

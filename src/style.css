@@ -32,6 +32,9 @@
   --color-bg-gradient-end: #4C3D99;
   --color-border: #DFE1E6;
 
+  /* Requirements spec colors */
+  --color-cta: #1A56DB;
+
   /* Typography */
   --font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-size-xs: 0.75rem;
@@ -78,8 +81,16 @@
   --transition-slow: 400ms ease;
 }
 
+/*
+ * Responsive Breakpoints (standardized):
+ * Mobile:  max-width: 767px
+ * Tablet:  min-width: 768px and max-width: 1023px
+ * Desktop: min-width: 1024px (default)
+ */
+
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: var(--header-height);
   font-size: 16px;
 }
 
@@ -166,7 +177,7 @@ ul {
 }
 
 .btn-primary {
-  background: var(--color-primary);
+  background: var(--color-cta);
   color: white;
 }
 
@@ -201,6 +212,35 @@ ul {
   box-shadow: var(--shadow-md);
 }
 
+.btn-outline-white {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.btn-outline-white:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
 /* ===== Animations ===== */
 @keyframes fadeInUp {
   from {
@@ -216,6 +256,20 @@ ul {
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 /* ===== Scrollbar ===== */
@@ -234,4 +288,23 @@ ul {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-text-light);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 767px) {
+  .section {
+    padding: var(--spacing-3xl) 0;
+  }
+
+  .section-title {
+    font-size: var(--font-size-2xl);
+  }
+
+  .section-subtitle {
+    font-size: var(--font-size-base);
+  }
+
+  .container {
+    padding: 0 var(--spacing-sm);
+  }
 }

@@ -3,71 +3,43 @@ const currentYear = new Date().getFullYear()
 
 const footerLinks = [
   {
-    title: '產品功能',
+    title: '產品',
     links: [
       { label: 'Rovo Search', href: '#features' },
       { label: 'Rovo Chat', href: '#features' },
-      { label: 'Rovo Agent', href: '#features' },
-      { label: '視覺化視圖', href: '#features' },
-      { label: 'AC 補全', href: '#features' },
+      { label: 'Rovo Agents', href: '#features' },
+      { label: '外部整合', href: '#integrations' },
+      { label: '應用範例', href: '#use-cases' },
     ],
   },
   {
-    title: '應用場景',
-    links: [
-      { label: '知識管理', href: '#use-cases' },
-      { label: '團隊協作', href: '#use-cases' },
-      { label: '技術支援', href: '#use-cases' },
-      { label: '客服支援', href: '#use-cases' },
-    ],
-  },
-  {
-    title: '關於我們',
+    title: '公司',
     links: [
       { label: 'Titansoft 鈦坦科技', href: 'https://titansoft.com/en' },
-      { label: 'Atlassian 合作夥伴', href: '#' },
-      { label: '敏捷轉型顧問', href: '#' },
+      { label: 'Atlassian 合作夥伴', href: 'https://www.atlassian.com/partners' },
+      { label: '免費課程', href: '#course-cta' },
+      { label: '聯絡我們', href: '#contact' },
+    ],
+  },
+  {
+    title: '法律',
+    links: [
+      { label: '隱私權政策', href: '#' },
+      { label: '服務條款', href: '#' },
+      { label: 'Cookie 政策', href: '#' },
     ],
   },
 ]
 </script>
 
 <template>
-  <footer class="footer" id="contact">
-    <!-- CTA Banner -->
-    <div class="footer__cta">
-      <div class="container">
-        <div class="footer__cta-content animate-on-scroll">
-          <h2 class="footer__cta-title">準備好釋放團隊的 AI 潛力了嗎？</h2>
-          <p class="footer__cta-subtitle">
-            立即聯繫我們，了解 Atlassian Rovo 如何為您的企業帶來改變
-          </p>
-          <div class="footer__cta-actions">
-            <a href="mailto:sales@titansoft.com.sg" class="btn btn-white">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              聯繫我們
-            </a>
-            <a href="tel:02-7723-6686" class="btn btn-outline-white">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              02-7723-6686
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Footer Content -->
+  <footer class="footer">
     <div class="footer__main">
       <div class="container">
         <div class="footer__grid">
           <div class="footer__brand">
             <div class="footer__logo">
-              <svg viewBox="0 0 32 32" width="36" height="36">
+              <svg viewBox="0 0 32 32" width="36" height="36" aria-hidden="true">
                 <defs>
                   <linearGradient id="footer-logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
                     <stop offset="0%" style="stop-color:#4C9AFF" />
@@ -83,29 +55,29 @@ const footerLinks = [
               </div>
             </div>
             <p class="footer__brand-desc">
-              新加坡商鈦坦科技為 Atlassian 合作夥伴，提供 Jira、Confluence 等專案管理工具導入、企業知識管理以及敏捷轉型顧問服務。
+              新加坡商鈦坦科技為 Atlassian 授權合作夥伴，提供 Jira、Confluence 等專案管理工具導入、企業知識管理以及敏捷轉型顧問服務。
             </p>
-            <div class="footer__contact-info">
-              <div class="footer__contact-item">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                  <polyline points="22,6 12,13 2,6"/>
+
+            <!-- Atlassian Partner Badge -->
+            <div class="footer__partner-badge">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+              <span>Atlassian Authorized Partner</span>
+            </div>
+
+            <!-- Social Media -->
+            <div class="footer__social">
+              <a href="https://www.linkedin.com/company/titansoft/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                 </svg>
-                sales@titansoft.com.sg
-              </div>
-              <div class="footer__contact-item">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72"/>
+              </a>
+              <a href="https://www.facebook.com/titansoft" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                 </svg>
-                02-7723-6686
-              </div>
-              <div class="footer__contact-item">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                  <circle cx="12" cy="10" r="3"/>
-                </svg>
-                台北市南港區園區街3之1號11樓之1（南港軟體園區 G 棟）
-              </div>
+              </a>
             </div>
           </div>
 
@@ -113,7 +85,12 @@ const footerLinks = [
             <h4 class="footer__link-title">{{ group.title }}</h4>
             <ul class="footer__link-list">
               <li v-for="link in group.links" :key="link.label">
-                <a :href="link.href" class="footer__link">{{ link.label }}</a>
+                <a
+                  :href="link.href"
+                  class="footer__link"
+                  :target="link.href.startsWith('http') ? '_blank' : undefined"
+                  :rel="link.href.startsWith('http') ? 'noopener noreferrer' : undefined"
+                >{{ link.label }}</a>
               </li>
             </ul>
           </div>
@@ -124,7 +101,7 @@ const footerLinks = [
             &copy; {{ currentYear }} 鈦坦科技 Titansoft Pte Ltd. All rights reserved.
           </p>
           <p class="footer__powered">
-            Powered by <a href="https://www.atlassian.com/software/rovo" target="_blank" rel="noopener">Atlassian Rovo</a>
+            Powered by <a href="https://www.atlassian.com/software/rovo" target="_blank" rel="noopener noreferrer">Atlassian Rovo</a>
           </p>
         </div>
       </div>
@@ -133,44 +110,6 @@ const footerLinks = [
 </template>
 
 <style scoped>
-.footer__cta {
-  background: linear-gradient(135deg, var(--color-bg-gradient-start) 0%, var(--color-secondary) 50%, #403294 100%);
-  padding: var(--spacing-4xl) 0;
-  text-align: center;
-}
-
-.footer__cta-title {
-  font-size: var(--font-size-3xl);
-  color: white;
-  margin-bottom: var(--spacing-md);
-}
-
-.footer__cta-subtitle {
-  font-size: var(--font-size-md);
-  color: rgba(255, 255, 255, 0.8);
-  margin-bottom: var(--spacing-xl);
-}
-
-.footer__cta-actions {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.btn-outline-white {
-  background: transparent;
-  color: white;
-  border: 2px solid rgba(255, 255, 255, 0.5);
-}
-
-.btn-outline-white:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: white;
-  color: white;
-  transform: translateY(-2px);
-}
-
 .footer__main {
   background: var(--color-bg-dark);
   padding: var(--spacing-3xl) 0 var(--spacing-lg);
@@ -209,21 +148,43 @@ const footerLinks = [
   font-size: var(--font-size-sm);
   color: rgba(255, 255, 255, 0.6);
   line-height: 1.8;
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
 }
 
-.footer__contact-info {
+.footer__partner-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-md);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+}
+
+.footer__social {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
-.footer__contact-item {
+.footer__social a {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: var(--font-size-sm);
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
   color: rgba(255, 255, 255, 0.6);
+  transition: all var(--transition-fast);
+}
+
+.footer__social a:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
 }
 
 .footer__link-title {
@@ -277,14 +238,21 @@ const footerLinks = [
   color: white;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1023px) {
   .footer__grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 32px;
   }
 
-  .footer__cta-title {
-    font-size: var(--font-size-2xl);
+  .footer__brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 767px) {
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
   }
 
   .footer__bottom {
